@@ -16,7 +16,8 @@ class CurlHttpClient {
   * @return void
   */
 
-    private function _init() {
+    private function init()
+    {
         $this->ch = curl_init();
         curl_setopt_array($this->ch, array(
             CURLOPT_RETURNTRANSFER => true,
@@ -25,8 +26,9 @@ class CurlHttpClient {
         ));
     }
 
-    public function __construct($config = []) {
-        $this->_init();
+    public function __construct() 
+    {
+        $this->init();
     }
     
      /**
@@ -37,7 +39,8 @@ class CurlHttpClient {
   * @return string
   */
 
-    private function _processParams(array $params) {
+    private function processParams(array $params)
+    {
         if (empty($params)) {
             return '';
         }
@@ -53,8 +56,9 @@ class CurlHttpClient {
   * @return string
   */
     
-    private function _buildUrl($url, $params) {
-        return $url . $this->_processParams($params);
+    private function buildUrl($url, $params)
+    {
+        return $url . $this->processParams($params);
     }
     
     /**
@@ -67,7 +71,8 @@ class CurlHttpClient {
   * @return Http\Client\Response Object
   */
 
-    private function _sendRequest($method, $url, $data = array()) {
+    private function sendRequest($method, $url, $data = array())
+    {
 
         curl_setopt_array(
                 $this->ch, array(
@@ -110,9 +115,10 @@ class CurlHttpClient {
   * @return Http\Client\Response Object
   */
 
-    public function get($url, $params = array()) {
-        $url = $this->_buildUrl($url, $params);
-        return $this->_sendRequest(self::METHOD_GET, $url);
+    public function get($url, $params = array())
+    {
+        $url = $this->buildUrl($url, $params);
+        return $this->sendRequest(self::METHOD_GET, $url);
     }
     
   /**
@@ -125,9 +131,10 @@ class CurlHttpClient {
   * @return Http\Client\Response Object
   */
     
-    public function post($url, $data, $params = array()) {
-        $url = $this->_buildUrl($url, $params);
-        return $this->_sendRequest(self::METHOD_POST, $url, $data);
+    public function post($url, $data, $params = array())
+    {
+        $url = $this->buildUrl($url, $params);
+        return $this->sendRequest(self::METHOD_POST, $url, $data);
     }
     
     /**
@@ -140,9 +147,10 @@ class CurlHttpClient {
   * @return Http\Client\Response Object
   */
 
-    public function put($url, $data, $params = array()) {
-        $url = $this->_buildUrl($url, $params);
-        return $this->_sendRequest(self::METHOD_POST, $url, $data);
+    public function put($url, $data, $params = array())
+    {
+        $url = $this->buildUrl($url, $params);
+        return $this->sendRequest(self::METHOD_POST, $url, $data);
     }
     
     /**
@@ -154,9 +162,10 @@ class CurlHttpClient {
   * @return Http\Client\Response Object
   */
 
-    public function delete($url, $params = array()) {
-        $url = $this->_buildUrl($url, $params);
-        return $this->_sendRequest(self::METHOD_DELETE, $url, $params);
+    public function delete($url, $params = array())
+    {
+        $url = $this->buildUrl($url, $params);
+        return $this->sendRequest(self::METHOD_DELETE, $url, $params);
     }
     
       /**
@@ -168,7 +177,8 @@ class CurlHttpClient {
   * @return Http\Client\Response Object
   */    
     
-    protected function createResponse($raw_headers, $body) {        
+    protected function createResponse($raw_headers, $body)
+    {        
         return new Response($raw_headers, $body);        
     }
 

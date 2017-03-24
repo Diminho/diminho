@@ -11,7 +11,8 @@ class Response {
     public $code;
     public $protocolVersion;
 
-    protected function init($rawHeaders, $body) {
+    protected function init($rawHeaders, $body)
+    {
         $this->headers = $this->httpParseHeaders($rawHeaders);
         $this->body = $body;
     }
@@ -22,7 +23,8 @@ class Response {
   * @return array
   */
     
-    public function getHeaders() {
+    public function getHeaders()
+    {
         return $this->headers;
     }
  /**
@@ -32,7 +34,8 @@ class Response {
   *
   * @return string
   */
-    public function getHeader($header) {
+    public function getHeader($header)
+    {
         try {
             if (array_key_exists($header, $this->headers)) {
                 return $this->headers[$header];
@@ -43,15 +46,18 @@ class Response {
         }
     }
 
-    public function body() {
+    public function body()
+    {
         return $this->body;
     }
 
-    public function json() {
+    public function json()
+    {
         return json_decode($this->body, true);
     }
 
-    public function __construct($raw_headers, $body) {
+    public function __construct($raw_headers, $body)
+    {
         $this->init($raw_headers, $body);
     }
 
@@ -63,7 +69,8 @@ class Response {
   * @return string
   */
     
-    public function httpParseHeaders($rawHeaders) {
+    public function httpParseHeaders($rawHeaders)
+    {
         if (is_array($rawHeaders)) {
             return $rawHeaders;
         }

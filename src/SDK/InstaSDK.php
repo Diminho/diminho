@@ -8,18 +8,21 @@ class InstaSDK {
     private $httpClient;
     protected $configs;
 
-    private function init() {
+    private function init()
+    {
         $auth = new Auth();
         $this->accessToken = $auth->getAccessToken('access_token');
         $client = $auth->getConfigItem('http_client');
         $this->setHttpClient(new $client);
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->init();
     }
 
-    public function setHttpClient($client) {
+    public function setHttpClient($client)
+    {
         $this->httpClient = $client;
     }
 
@@ -35,7 +38,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
 
-    public function getUserById($userId) {
+    public function getUserById($userId)
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/users/' . $userId . '/?', array('access_token' => $this->accessToken));
     }
 
@@ -48,7 +52,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
     
-    public function getUsersRecentMedia($userId, array $params = array()) {
+    public function getUsersRecentMedia($userId, array $params = array())
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/users/' . $userId . '/media/recent/?', array('access_token' => $this->accessToken) + $params);
     }
 
@@ -61,7 +66,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
     
-    public function getSearchUserByUsername($username, array $params = array()) {
+    public function getSearchUserByUsername($username, array $params = array())
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/users/search?', array('q' => $username, 'access_token' => $this->accessToken) + $params);
     }
 
@@ -79,7 +85,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
     
-    public function getMediaById($mediaId) {
+    public function getMediaById($mediaId)
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/media/' . $mediaId . '?', array('access_token' => $this->accessToken));
     }
     /**
@@ -92,7 +99,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
 
-    public function getMediaByShortcode($shortcode) {
+    public function getMediaByShortcode($shortcode)
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/media/shortcode/' . $shortcode . '?', array('access_token' => $this->accessToken));
     }
     
@@ -104,7 +112,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
 
-    public function getMediaByArea($params) {
+    public function getMediaByArea($params)
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/media/search/?', array('access_token' => $this->accessToken) + $params);
     }
 
@@ -120,7 +129,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
     
-    public function postSetLikeMedia($mediaId) {
+    public function postSetLikeMedia($mediaId)
+    {
         return $this->httpClient->post('https://api.instagram.com/v1/media/' . $mediaId . '/likes', array('access_token' => $this->accessToken));
     }
     
@@ -132,7 +142,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
 
-    public function getLikesByMedia($mediaId) {
+    public function getLikesByMedia($mediaId)
+    {
         return $this->httpClient->get('https://api.instagram.com/v1/media/' . $mediaId . '/likes?', array('access_token' => $this->accessToken));
     }
     
@@ -144,7 +155,8 @@ class InstaSDK {
   * @return Http\Client\Response Object
   */
 
-    public function delUnsetLikesByMedia($mediaId) {
+    public function delUnsetLikesByMedia($mediaId)
+    {
         return $this->httpClient->delete('https://api.instagram.com/v1/media/' . $mediaId . '/likes?access_token=' . $this->accessToken);
     }
 

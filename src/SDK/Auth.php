@@ -10,7 +10,8 @@ class Auth {
     public $configManager;
     public $baseConfigDir = './config';
 
-    public function __construct() {
+    public function __construct()
+    {
         $configFileParts = $this->getConfigFile();
 
         $configManagerType = "SDK\ConfigManager\\" . strtoupper($configFileParts['extension']) . 'ConfigManager';
@@ -25,7 +26,8 @@ class Auth {
   * @return array
   */
 
-    public function getConfigFile() {
+    public function getConfigFile()
+    {
         $files = scandir($this->baseConfigDir);
         foreach ($files as $file) {
             $pathParts = pathinfo($file);
@@ -44,7 +46,8 @@ class Auth {
   * @return void
   */
 
-    public function registerAccessToken($accessToken) {
+    public function registerAccessToken($accessToken)
+    {
         $this->configManager->setItem('access_token', $accessToken);
         $this->refreshConfig();
     }
@@ -55,7 +58,8 @@ class Auth {
   * @return string
   */
 
-    public function getAccessToken() {
+    public function getAccessToken()
+    {
         return $this->configManager->getItem('access_token');
     }
 
@@ -68,7 +72,8 @@ class Auth {
   * @return void
   */
     
-    public function setConfigItem($item, $value) {
+    public function setConfigItem($item, $value)
+    {
         $this->configManager->setItem($item, $value);
         $this->refreshConfig();
     }
@@ -81,7 +86,8 @@ class Auth {
   * @return string
   */
 
-    public function getConfigItem($item) {
+    public function getConfigItem($item)
+    {
         return $this->configManager->getItem($item);
     }
     
@@ -91,7 +97,8 @@ class Auth {
   * @return void
   */
 
-    public function refreshConfig() {
+    public function refreshConfig()
+    {
         $this->config = $this->configManager->getConfigArray();
     }
 
