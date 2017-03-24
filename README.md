@@ -9,7 +9,7 @@ You can download SDK via `composer`
 $ composer require diminho/diminho=dev-master
 ```
 ### Config
-There are several templates of a config file (config_default) in config folder. Rename it to config.[ext]. Only one config file should be active at a time. Config may be of PHP or JSON fomat.
+There are several templates of a config file (config_default) in config folder. Rename it to config.[ext]. Only one config file should be active at a time. Config may be of PHP or JSON fomat. Access token can bet set via config file or programmatically via SDK\Auth class.
 
 ### Usage
 
